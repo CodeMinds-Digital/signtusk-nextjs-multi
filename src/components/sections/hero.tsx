@@ -2,11 +2,11 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import {
   ArrowRight,
   Play,
-  CheckCircle,
   Users,
   FileText,
   BarChart3,
@@ -43,49 +43,85 @@ export function HeroSection() {
       <div className="container-responsive">
         <div className="mx-auto max-w-4xl text-center">
           {/* Announcement badge */}
-          <div className="mb-8 inline-flex items-center rounded-full bg-primary-50 px-4 py-2 text-sm font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8 inline-flex items-center rounded-full bg-primary-50 px-4 py-2 text-sm font-medium text-primary-700 ring-1 ring-inset ring-primary-700/10"
+          >
             <Zap className="mr-2 h-4 w-4" />
             New: AI-powered document insights now available
-          </div>
+          </motion.div>
 
           {/* Main headline */}
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl leading-tight">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl leading-tight"
+          >
             Secure Document
             <span className="gradient-text block leading-tight py-2">Signing & Sharing</span>
             Made Simple
-          </h1>
+          </motion.h1>
 
           {/* Subheadline */}
-          <p className="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto"
+          >
             Transform your document workflows with SignTusk. Send, track, and sign documents securely
             with real-time analytics, multi-party workflows, and enterprise-grade security.
-          </p>
+          </motion.p>
 
           {/* Feature highlights */}
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto"
+          >
             {features.map((feature, index) => (
-              <div key={index} className="flex items-center justify-center sm:justify-start space-x-3 text-sm text-gray-600 bg-white/50 backdrop-blur-sm rounded-lg p-3 border border-gray-100">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center justify-center sm:justify-start space-x-3 text-sm text-gray-600 bg-white/50 backdrop-blur-sm rounded-lg p-3 border border-gray-100"
+              >
                 <feature.icon className="h-5 w-5 text-primary-600 flex-shrink-0" />
                 <span className="font-medium">{feature.text}</span>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* CTA buttons */}
-          <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full max-w-lg mx-auto">
-            <Button size="xl" variant="gradient" className="group flex-1 sm:flex-none sm:min-w-[200px] btn-cta" asChild>
-              <Link href="/signup" className="btn-cta">
-                Start Free Trial
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-            <Button size="xl" variant="outline" className="group flex-1 sm:flex-none sm:min-w-[200px] btn-cta" asChild>
-              <Link href="#demo" className="btn-cta text-gray-900">
-                <Play className="h-5 w-5" />
-                <span>Watch Demo</span>
-              </Link>
-            </Button>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 w-full max-w-lg mx-auto"
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button size="xl" variant="gradient" className="group flex-1 sm:flex-none sm:min-w-[200px] btn-cta" asChild>
+                <Link href="/signup" className="btn-cta">
+                  Start Free Trial
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button size="xl" variant="outline" className="group flex-1 sm:flex-none sm:min-w-[200px] btn-cta" asChild>
+                <Link href="#demo" className="btn-cta text-gray-900">
+                  <Play className="h-5 w-5" />
+                  <span>Watch Demo</span>
+                </Link>
+              </Button>
+            </motion.div>
+          </motion.div>
 
           {/* Trust indicators */}
           <div className="mt-12 text-center">

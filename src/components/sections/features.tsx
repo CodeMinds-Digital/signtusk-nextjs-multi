@@ -1,20 +1,20 @@
 'use client'
 
 import React from 'react'
+import { motion } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { 
-  FileText, 
-  Users, 
-  BarChart3, 
-  Shield, 
-  Zap, 
+import {
+  FileText,
+  Users,
+  BarChart3,
+  Shield,
+  Zap,
   Clock,
   Globe,
   Smartphone,
   CheckCircle,
   Eye,
-  Download,
-  RefreshCw
+  Download
 } from 'lucide-react'
 
 const primaryFeatures = [
@@ -88,7 +88,7 @@ export function FeaturesSection() {
             <span className="gradient-text block">streamline document workflows</span>
           </h2>
           <p className="mt-4 text-lg text-gray-600">
-            From simple signatures to complex multi-party workflows, SignTusk provides 
+            From simple signatures to complex multi-party workflows, SignTusk provides
             all the tools you need to digitize your document processes.
           </p>
         </div>
@@ -96,48 +96,65 @@ export function FeaturesSection() {
         {/* Primary features grid */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mb-20">
           {primaryFeatures.map((feature, index) => (
-            <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md">
-              <CardHeader className="pb-4">
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-xl group-hover:bg-primary-200 transition-colors">
-                    <feature.icon className="w-6 h-6 text-primary-600" />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <Card className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md h-full">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-xl group-hover:bg-primary-200 transition-colors">
+                      <feature.icon className="w-6 h-6 text-primary-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-xl">{feature.title}</CardTitle>
+                    </div>
                   </div>
-                  <div>
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base text-gray-600 mb-4">
-                  {feature.description}
-                </CardDescription>
-                <ul className="space-y-2">
-                  {feature.features.map((item, idx) => (
-                    <li key={idx} className="flex items-center space-x-2 text-sm text-gray-600">
-                      <CheckCircle className="w-4 h-4 text-success-500 flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base text-gray-600 mb-4">
+                    {feature.description}
+                  </CardDescription>
+                  <ul className="space-y-2">
+                    {feature.features.map((item, idx) => (
+                      <li key={idx} className="flex items-center space-x-2 text-sm text-gray-600">
+                        <CheckCircle className="w-4 h-4 text-success-500 flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
         {/* Secondary features grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {secondaryFeatures.map((feature, index) => (
-            <Card key={index} className="group hover:shadow-md transition-all duration-300 text-center border-0 shadow-sm">
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-xl mx-auto mb-4 group-hover:bg-primary-200 transition-colors">
-                  <feature.icon className="w-6 h-6 text-primary-600" />
-                </div>
-                <CardTitle className="text-lg mb-2">{feature.title}</CardTitle>
-                <CardDescription className="text-gray-600">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+            >
+              <Card className="group hover:shadow-md transition-all duration-300 text-center border-0 shadow-sm h-full">
+                <CardContent className="pt-6">
+                  <div className="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-xl mx-auto mb-4 group-hover:bg-primary-200 transition-colors">
+                    <feature.icon className="w-6 h-6 text-primary-600" />
+                  </div>
+                  <CardTitle className="text-lg mb-2">{feature.title}</CardTitle>
+                  <CardDescription className="text-gray-600">
+                    {feature.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
@@ -147,10 +164,10 @@ export function FeaturesSection() {
             Integrates with your favorite tools
           </h3>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Connect SignTusk with the tools you already use. Our API and pre-built integrations 
+            Connect SignTusk with the tools you already use. Our API and pre-built integrations
             make it easy to embed document workflows into your existing processes.
           </p>
-          
+
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 lg:grid-cols-6 opacity-60 max-w-4xl mx-auto">
             {[
               'Salesforce', 'HubSpot', 'Slack', 'Microsoft', 'Google', 'Zapier'
@@ -170,7 +187,7 @@ export function FeaturesSection() {
             Ready to transform your document workflows?
           </h3>
           <p className="text-primary-100 mb-6 max-w-2xl mx-auto">
-            Join thousands of teams who have streamlined their document processes with SignTusk. 
+            Join thousands of teams who have streamlined their document processes with SignTusk.
             Start your free trial today and see the difference.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

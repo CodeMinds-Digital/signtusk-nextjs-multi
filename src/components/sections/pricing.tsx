@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckCircle, Star, Zap, Crown, Building } from 'lucide-react'
@@ -128,71 +129,79 @@ export function PricingSection() {
         {/* Pricing cards */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {plans.map((plan, index) => (
-            <Card
+            <motion.div
               key={index}
-              className={cn(
-                "relative transition-all duration-300 hover:shadow-lg",
-                plan.popular
-                  ? "border-primary-500 shadow-lg scale-105 ring-2 ring-primary-500 ring-opacity-20"
-                  : "border-gray-200 hover:border-gray-300"
-              )}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10 }}
             >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-medium">
-                    Most Popular
+              <Card
+                className={cn(
+                  "relative transition-all duration-300 hover:shadow-lg h-full",
+                  plan.popular
+                    ? "border-primary-500 shadow-lg scale-105 ring-2 ring-primary-500 ring-opacity-20"
+                    : "border-gray-200 hover:border-gray-300"
+                )}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <div className="bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                      Most Popular
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              <CardHeader className="text-center pb-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-xl mx-auto mb-4">
-                  <plan.icon className="w-6 h-6 text-primary-600" />
-                </div>
-                <CardTitle className="text-xl">{plan.name}</CardTitle>
-                <CardDescription className="text-gray-600">
-                  {plan.description}
-                </CardDescription>
-              </CardHeader>
+                <CardHeader className="text-center pb-4">
+                  <div className="flex items-center justify-center w-12 h-12 bg-primary-100 rounded-xl mx-auto mb-4">
+                    <plan.icon className="w-6 h-6 text-primary-600" />
+                  </div>
+                  <CardTitle className="text-xl">{plan.name}</CardTitle>
+                  <CardDescription className="text-gray-600">
+                    {plan.description}
+                  </CardDescription>
+                </CardHeader>
 
-              <CardContent className="text-center">
-                <div className="mb-6">
-                  <div className="flex items-baseline justify-center">
-                    <span className="text-4xl font-bold text-gray-900">
-                      {typeof plan.price.monthly === 'number' ? '$' : ''}
-                      {isYearly ? plan.price.yearly : plan.price.monthly}
-                    </span>
-                    {typeof plan.price.monthly === 'number' && (
-                      <span className="text-gray-600 ml-1">/month</span>
+                <CardContent className="text-center">
+                  <div className="mb-6">
+                    <div className="flex items-baseline justify-center">
+                      <span className="text-4xl font-bold text-gray-900">
+                        {typeof plan.price.monthly === 'number' ? '$' : ''}
+                        {isYearly ? plan.price.yearly : plan.price.monthly}
+                      </span>
+                      {typeof plan.price.monthly === 'number' && (
+                        <span className="text-gray-600 ml-1">/month</span>
+                      )}
+                    </div>
+                    {isYearly && typeof plan.price.monthly === 'number' && (
+                      <div className="text-sm text-gray-500 mt-1">
+                        Billed annually (${plan.price.yearly * 12}/year)
+                      </div>
                     )}
                   </div>
-                  {isYearly && typeof plan.price.monthly === 'number' && (
-                    <div className="text-sm text-gray-500 mt-1">
-                      Billed annually (${plan.price.yearly * 12}/year)
-                    </div>
-                  )}
-                </div>
 
-                <Button
-                  className={cn(
-                    "w-full mb-6",
-                    plan.popular ? "variant-gradient" : ""
-                  )}
-                  variant={plan.popular ? "default" : "outline"}
-                >
-                  {plan.cta}
-                </Button>
+                  <Button
+                    className={cn(
+                      "w-full mb-6",
+                      plan.popular ? "variant-gradient" : ""
+                    )}
+                    variant={plan.popular ? "default" : "outline"}
+                  >
+                    {plan.cta}
+                  </Button>
 
-                <ul className="space-y-3 text-left">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-success-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+                  <ul className="space-y-3 text-left">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-success-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-600">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
