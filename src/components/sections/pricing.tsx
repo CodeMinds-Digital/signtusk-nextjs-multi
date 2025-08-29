@@ -174,7 +174,7 @@ export function PricingSection() {
                         <span className="text-gray-600 ml-1">/month</span>
                       )}
                     </div>
-                    {isYearly && typeof plan.price.monthly === 'number' && (
+                    {isYearly && typeof plan.price.monthly === 'number' && typeof plan.price.yearly === 'number' && (
                       <div className="text-sm text-gray-500 mt-1">
                         Billed annually (${plan.price.yearly * 12}/year)
                       </div>
