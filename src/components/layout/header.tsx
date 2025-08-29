@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Menu, X, FileText, ChevronDown } from 'lucide-react'
+import { Menu, X, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navigation = [
@@ -28,8 +28,8 @@ export function Header() {
   return (
     <header className={cn(
       "fixed inset-x-0 top-0 z-50 transition-all duration-200",
-      scrolled 
-        ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100" 
+      scrolled
+        ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100"
         : "bg-transparent"
     )}>
       <nav className="container-responsive flex items-center justify-between py-4">
